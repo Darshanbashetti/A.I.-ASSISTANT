@@ -1,0 +1,152 @@
+import pyttsx3 
+import datetime
+import smtplib
+import speech_recognition as sr
+import wikipedia
+import webbrowser as wb   
+import os  
+
+
+engine= pyttsx3.init()                          #initialization
+voices= engine.getProperty('voices')            #gets different voices
+engine.setProperty('voice', voices[1].id)       #female voice
+newVoiceRate= 190                               #voice rate
+engine.setProperty('rate', newVoiceRate) 
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+    
+def time():                                      #time function
+    Time= datetime.datetime.now().strftime("%I:%M:%S")
+    speak("Current time is")
+    speak(Time)
+
+def date():                                      #date function
+ year   = int(datetime.datetime.now().year)
+ month  = int(datetime.datetime.now().month)
+ day    = int(datetime.datetime.now().day)
+ speak("Current date is ")
+ speak(day)
+ speak(month)
+ speak(year)
+   
+def wishme():                                     #wish function
+       
+       hour = datetime.datetime.now().hour
+
+       if hour >= 6 and hour < 12:
+        speak("Good morning")
+
+       elif hour >=12 and hour < 17:
+        speak("Good afternoon")
+       elif hour >= 17 and hour < 24:
+        speak("Good evening")
+       else :  speak("Good night")
+
+
+       speak("My name is Hazel. How can I help you")
+
+
+def takeCommand():
+    r= sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening....")
+        r.pause_threshold = 1
+        audio = r.listen(source) 
+ 
+    try:
+        print("Recognising....")
+        query = r.recognize_google(audio, language= "en-in")
+        print(query)
+    except Exception as e:
+        print(e)
+        speak("Can you repeat that again please!")
+     
+        return "None"
+    
+    return query
+
+def sendmail(to,content):
+    server = smtplib.smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.startls()
+    server.login("test@gmail.com","123test")
+    server.sendmail("text@gmail.com",to,content)
+    server.close()
+
+
+if __name__=="__main__":
+ wishme()
+
+ while True:
+          query=takeCommand().lower()
+
+          if "time" in query:
+              time()
+           
+          elif "date" in query:
+              date()
+        
+          elif "offline" in query:
+              quit()    
+
+          elif "wikipedia" in query:
+              speak("searching...")
+              query= query.replace("wikipedia", "")
+              result=wikipedia.summary(query,sentences=2)
+              speak(result)
+
+          elif "thank you" in query:
+              speak("Your Welcome")
+          
+          elif "send email" in query:
+              try:
+                  speak("What should I say?")
+                  content = takeCommand()
+                  to = "xyz@gmail.com"          
+                  sendmail(to, content)
+                  speak("content")                              
+             
+              except Exception as e:
+                  speak(e)
+                  speak("Unable to send the mail")
+
+          elif "search in chrome" in query:
+              speak("What should I search?")
+              chromepath ="C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
+              search = takeCommand().lower()                                        #converts the search sentence in lower case
+              wb.get(chromepath).open_new_tab(search)
+              quit()
+              
+          elif "logout" in query:
+              os.system("shutdown - 1")
+        
+          elif "shutdown" in query:
+              os.system("shutdown /s /t 1")
+              
+          elif "restart" in query:
+              os.system("shutdown - /r /s 1")
+
+          elif "play song" in query:
+           songs_dir = "D:\movies"
+           songs = os.listdir(songs_dir)
+           os.startfile(os.path.join(songs_dir,songs[0]))
+           quit()
+
+          elif "remind me" in query:
+            speak("What should I remind?")
+            data = takeCommand()
+            speak("you asked me to remind" +data)
+            remember = open("data.txt","w")
+            remember.write(data)
+            remember.close()
+            
+
+          elif "do you know anything" in query:
+              remember = open("data.txt","r")
+              speak("You told me to remind you " +remember.read())
+        
+          
+            
+          
