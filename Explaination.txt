@@ -1,0 +1,93 @@
+	>> introduction <<
+
+>What is AI assistant?
+
+= A virtual assistant, also called AI assistant or digital assistant, is an application program that understands natural language voice commands and completes tasks for the user.
+
+
+
+>>Role of AI assistant in everyday life:
+
+= The most popular use of A.I. comes in the form of digital smart assistants, such as Siri, Alexa and Google Assistant. These A.I.-powered personal assistants are able to perform many tasks be it adding items to your shopping list or calling a friend. There’s no question that voice assistants will continue to grow and become even more capable of assisting us in our daily lives.
+
+
+
+
+>>>about hazel
+
+> Hazel is an AI assistant who can
+= Tell date and time
+= Search in Wikipedia
+= Search in chrome
+= Play song
+= Shut down the system
+= Set a remainder
+
+>>>Modules imported:
+
+= pyttsx3 
+pyttsx3 is a text-to-speech conversion library in Python. Unlike alternative libraries, it works offline and is compatible with both Python 2 and 3.
+
+= datetime
+datetime in Python is the combination between dates and times. The attributes of this class are similar to both date and separate classes. These attributes include day, month, year, minute, second, microsecond etc
+
+= speech_recognition
+Speech recognition is a machine's ability to listen to spoken words and identify them. You can then use speech recognition in Python to convert the spoken words into text, make a query or give a reply. 
+
+= wikipedia
+Wikipedia is a Python library that makes it easy to access and parse data from Wikipedia. Search Wikipedia, get article summaries, get data like links and images from a page, and more. 
+
+= webbrowser  
+In Python, webbrowser module is a convenient web browser controller. It provides a high-level interface that allows displaying Web-based documents to users.
+
+= os
+The OS module in Python provides functions for creating and removing a directory (folder), fetching its contents, changing and identifying the current directory, etc. You first need to import the os module to interact with the underlying operating system.
+
+
+>>Functions:
+
+>Speak:
+=We have initialised the module pyttsx3 includes drivers for different text to speech synthesizers. We have used “say” with the help of which we can give output according to the properties set.
+
+>Time:
+=This function tells the current time in hour, minute and second format.
+
+>Date:
+=This function tells the date in  dd-mm-yy  format.
+
+>4.   Wishme:
+
+=This function wishes the user according to the time i.e.
+ Good morning, Good afternoon or Good night.
+
+>5.Take Command:
+
+This function takes in the user input in the form of a voice command by turning on the microphone while it prints “listening” on the screen. Once the command is given, it recognizes the speech and prints it onto the screen as query after which it is processed and a suitable output is given.
+In case it fails to recognize what is being said by the user, it asks the user to repeat.
+
+Date and time function:
+•If asked for date or time it calls the respective functions.
+Date Time
+
+Offline:
+•If the query is offline ,the assistant is turned off.
+
+Search in Wikipedia
+•If the query is Wikipedia, it reads first two lines of the summary for the searched information.
+
+Search in chrome:
+•If the query is search in chrome then it opens a new tab and searches for the provided information.
+
+>>Shut down:
+•For shut down ,it does as directed.
+ShutDown
+
+>>Play song:
+•If the query is play song it plays the song saved in the respective folder in the computer.
+
+>>Remainders:
+•If the query is remind me , it saves the remainder information into a separate text file and the remainder is set.
+•If the query is do you know anything , it reads all the remainders set.
+
+
+
